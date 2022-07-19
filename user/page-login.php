@@ -22,10 +22,14 @@ $passw = hash('sha256', $_POST['password']);
 
 $salt = createSalt();
 $pass = hash('sha256', $salt . $passw);
-    $stmt = $conn->prepare("SELECT * FROM travellers WHERE email='" .$_POST['email'] . "' and password = '".$pass."' and status='Activate'"); 
-      $stmt->execute();
+    //$stmt = $conn->prepare("SELECT * FROM travellers WHERE email='" .$_POST['email'] . "' and password = '".$pass."' and status='Activate'"); 
 
+    $sql= "SELECT * FROM travellers WHERE email='" .$_POST['email'] . "' and password = '".$_POST['password']."'"; 
+    $stmt = $conn->prepare($sql);
+      $stmt->execute();
       $row=$stmt->fetch(PDO::FETCH_ASSOC);
+      echo $row;
+      die();
      $_SESSION["id"] = $row['id'];
      $_SESSION["name"] = $row['name'];
       $_SESSION["photo"] = $row['photo'];
@@ -143,7 +147,7 @@ catch(PDOException $e)
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30" name="btn_login">Sign in</button>
                                     <div class="register-link m-t-15 text-center">
-                                        <p>Don't have account ? <a href="#"> Sign Up Here</a></p>
+                                        <p>Don't have account ? <a href="page-register.php"> Sign Up Here</a></p>
                                     </div>
                                 </form>
                             </div>

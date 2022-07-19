@@ -42,7 +42,7 @@
                                 print '<div class="alert alert-success mb-2" role="alert">'.$_SESSION['reply'].'</div>';
                             }
                                 ?> 
-                                <form method="post">
+                                <form method="post" action="page-register.php">
                                     <div class="form-group">
                                         <label>User Name</label>
                                         <input type="text" class="form-control" placeholder="User Name" name="uname" required>
@@ -114,9 +114,9 @@ try {
        
           $sql = "INSERT INTO register (uname, email, password, contact)
      VALUES ('".$_POST['uname']."','".$_POST['email']."','".$_POST['password']."','".$_POST['contact']."')";
+            $conn-> query($sql);
 
-
-            echo "New record created successfully";
+            echo "<script>"."alert('New client created successfully')"."</script>";
 
 
     }
